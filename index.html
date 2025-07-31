@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Opener</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      text-align: center;
+      padding: 50px;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #FD0104;
+      font-weight: 550;
+    }
+
+    p {
+      font-size: 1em;
+    }
+
+    input[type="text"] {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 20px;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s;
+}
+
+    input[type="text"]:focus {
+  border-color: #FD0104;
+  outline: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+    button {
+  padding: 11px 25px;
+  height: 48px;
+  font-size: 1em;
+  color: white;
+  background-color: #FD0104;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+    button:hover {
+  background-color: #E80104;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+     .page-header {
+    background-color: #FD0104;
+    color: white;
+    padding: 20px;
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <div style="background-color: #FD0104; color: white; padding: 20px; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+  <img src="Superbet_Symbol_White.png" alt="Betler Logo" style="height: 40px; margin-right: 15px; filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));" />
+  <span style="font-size: 1.5em; font-weight: 700; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);">BETLER PLAYER'S PROFILE OPENER</span>
+  </div>
+  <img src="Superbet_Logo_Super_Red.png" alt="Betler Logo" style="max-width: 300px; margin: 50px auto 50px auto; display: block; filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));" />
+  <div style="max-width: 600px; margin: 0 auto 30px auto; text-align: left; background-color: #e7e7e7; padding: 20px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+  <p style="margin-top: 0;">
+    This tool allows you to open customer profiles in Betler, including multiple profiles at once.
+  </p>
+  <p style="margin-bottom: 0;">
+    To use it, enter one or more Betler user IDs and click the <strong>"Open profile"</strong> button or press <strong>Enter</strong>. If you’re entering multiple IDs, separate them with <strong>commas</strong> (no spaces needed).
+  </p>
+</div>
+  <div style="max-width: 600px; margin: 0 auto; display: flex; gap: 10px; justify-content: center;">
+  <input
+    type="text"
+    id="inputText"
+    placeholder="e.g. c34d071d-eb62-41fa-a4e8-411ac8007057"
+    style="flex: 1; padding: 12px 20px; border: 2px solid #ccc; border-radius: 8px; font-size: 1em; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);"
+  />
+  <button onclick="openMultipleURLs()">Open profile</button>
+</div>
+
+  <script>
+    const input = document.getElementById("inputText");
+
+    function openMultipleURLs() {
+      const userInput = input.value.trim();
+      if (userInput) {
+        const baseUrl = "https://bacoff.services.production.betler.superbet.com/customer/"; // Replace with your actual base URL
+        const values = userInput.split(",").map(val => val.trim()).filter(val => val !== "");
+
+        if (values.length === 0) {
+          alert("Please enter at least one valid value.");
+          return;
+        }
+
+        values.forEach(value => {
+          const fullUrl = baseUrl + encodeURIComponent(value);
+          window.open(fullUrl, "_blank");
+        });
+      } else {
+        alert("Please enter user ID.");
+      }
+    }
+
+    // Listen for Enter key
+    input.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        openMultipleURLs();
+      }
+    });
+  </script>
+</body>
+</html>
